@@ -1,11 +1,4 @@
-CREATE DATABASE hibernatedb
-    WITH 
-    OWNER = postgres
-    ENCODING = 'UTF8'
-    LC_COLLATE = 'English_United States.1252'
-    LC_CTYPE = 'English_United States.1252'
-    TABLESPACE = pg_default
-    CONNECTION LIMIT = -1;
+CREATE DATABASE hibernatedb;
 
 CREATE TABLE person(
 	person_id serial not null primary key,
@@ -42,9 +35,9 @@ CREATE TABLE person_role (
 	role_id bigint references roles(role_id )
 );
 
-create sequence HIBERNATE_SEQUENCE
-minvalue 1
-maxvalue 2147483647
-start with 1000
-increment by 1
+create sequence HIBERNATE_SEQUENCE 
+minvalue 1 
+maxvalue 2147483647 
+start with 1000 
+increment by 1 
 cache 1;
