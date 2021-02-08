@@ -160,14 +160,22 @@ public class MainApp  {
 			System.out.print("Enter Person Id Number: ");
 			int personId = Validate.numberInputValidate(getInput);
 			
-			try {
+			System.out.println("WARNING!");
+			System.out.println("Please Remove the person role first!");
+			System.out.println("Deleting Person with assigned Role will delete the role and person with its role");
+			System.out.print("Are you sure?(Y/N): ");
+			boolean confirm = Validate.inputBoolean(getInput);
+			
+			if(confirm == true) {
+				try {
 
-				DataAccessObject.deletePerson(personId);
-				System.out.println("\nId Number " + personId + " Successfully Deleted!");
+					DataAccessObject.deletePerson(personId);
+					System.out.println("\nId Number " + personId + " Successfully Deleted!");
 
-			} catch(IllegalArgumentException e) {
-				System.out.println("\nId Number not Exist!!\n");
-			}	
+				} catch(IllegalArgumentException e) {
+					System.out.println("\nId Number not Exist!!\n");
+				}	
+			}
 
 	}
 

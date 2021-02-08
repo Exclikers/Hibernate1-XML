@@ -29,7 +29,7 @@
 			<one-to-many class="Contacts"/>
 		 </set>
 
-		 <set name="roles" table="person_role" inverse="false" lazy="false" fetch="select" cascade="all">
+		 <set name="roles" table="person_role" inverse="false" lazy="false" cascade="all">
 			<key column="person_id" not-null="true"/>
 			<many-to-many entity-name="net.hibernate.Roles">
                 <column name="role_id" not-null="true" />
