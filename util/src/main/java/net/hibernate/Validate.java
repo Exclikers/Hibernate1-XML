@@ -163,24 +163,26 @@ public class Validate {
 	}
 
 	public static long validMobileNumber(String message, Scanner getInput) {
-		String strChecker = "";
-		long mobileNumber = 0;
-		boolean checker = true;
 
+		Long choice = null;
+		boolean isNumber;
+		
 		do {
-			checker = true;
 			System.out.print(message);
-			strChecker = getInput.nextLine();
-			if(!StringUtils.isNumeric(strChecker)) {
-				System.out.println("input numbers only!");
-				checker = false;
-			} else if(StringUtils.length(strChecker) > 11) {
-				System.out.println("max of 11 digit!!!");
-				checker = false;
+			if (getInput.hasNextLong()) {
+				choice = getInput.nextLong();
+				isNumber = true;
 			} else {
-				 mobileNumber = Long.parseLong(strChecker.substring(1));
+	    		System.out.println("Please Input a valid number!");
+	    		isNumber = false;
+	    		getInput.nextLong();
+	    	}
+	    	if (String.valueOf(choice).length() > 10) {
+		    	System.out.println("Max of 11 Numbers");
+		    	isNumber = false;
 			}
-		} while(checker == false);
-		return mobileNumber;
+			
+	    } while (!(isNumber));
+	    return choice;
 	}
 }

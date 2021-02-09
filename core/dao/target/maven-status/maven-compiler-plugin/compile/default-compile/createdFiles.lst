@@ -1,2 +1,5 @@
 net\hibernate\DataAccessObject$1.class
+net\hibernate\PersonDAO.class
+net\hibernate\RoleDAO.class
+net\hibernate\ContactDAO.class
 net\hibernate\DataAccessObject.class

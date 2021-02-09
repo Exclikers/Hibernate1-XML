@@ -1,1 +1,3 @@
-net\hibernate\Service.class
+net\hibernate\PersonService.class
+net\hibernate\RoleService.class
+net\hibernate\ContactService.class

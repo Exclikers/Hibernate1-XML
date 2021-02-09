@@ -124,8 +124,8 @@ public class MainApp  {
 
 		if (choice == 13) {
 
-			Set<Roles> roleSet = DataAccessObject.findRole();
-			Service.listRole(roleSet);
+			Set<Roles> roleSet = RoleDAO.findRole();
+			RoleService.listRole(roleSet);
 			mainMenu();
 
 		}
@@ -147,9 +147,9 @@ public class MainApp  {
 	private static void createPerson() throws Exception {
 
 		Person person = inputPerson(getInput);
-		DataAccessObject.addPerson(person);
+		PersonDAO.addPerson(person);
 		Contacts contact = inputContact(getInput, person);
-		DataAccessObject.addContact(contact);
+		ContactDAO.addContact(contact);
 
 	}
 
@@ -169,7 +169,7 @@ public class MainApp  {
 			if(confirm == true) {
 				try {
 
-					DataAccessObject.deletePerson(personId);
+					PersonDAO.deletePerson(personId);
 					System.out.println("\nId Number " + personId + " Successfully Deleted!");
 
 				} catch(IllegalArgumentException e) {
@@ -193,7 +193,7 @@ public class MainApp  {
 			System.out.println("**************************************************************\n");
 
 			try {
-				Person personToUpdate = DataAccessObject.findPersonId(personId);
+				Person personToUpdate = PersonDAO.findPersonId(personId);
 				System.out.println("");
 				System.out.print("Select: ");
 				int selectedItem = Validate.numberInputValidate(getInput);
@@ -201,7 +201,7 @@ public class MainApp  {
 				if (selectedItem > 12) {
 					System.out.println("Please Select from 1 to 12 Only!");
 				} else {
-					DataAccessObject.updatePerson(Service.editPerson(personToUpdate,selectedItem,getInput));
+					PersonDAO.updatePerson(PersonService.editPerson(personToUpdate,selectedItem,getInput));
 				}		
 				
 			} catch(Exception e) {
@@ -234,7 +234,7 @@ public class MainApp  {
 				persons = DataAccessObject.sortByLastName();
 				if(persons.isEmpty()) {System.out.println("\nNo person on the List!!\n");}
 			}
-			Service.listPerson(persons);
+			PersonService.listPerson(persons);
 			
 	}
 
@@ -244,15 +244,15 @@ public class MainApp  {
 			System.out.print("Enter Person Id Number: ");
 			int personId = Validate.numberInputValidate(getInput);
 
-			Set<Roles> roleSet = DataAccessObject.findRole();
-			Service.listRole(roleSet);
+			Set<Roles> roleSet = RoleDAO.findRole();
+			RoleService.listRole(roleSet);
 
 			System.out.print("Enter Role Id Number: ");
 			int roleId = Validate.numberInputValidate(getInput);
 
 			try {
-				Person addPersonRole = DataAccessObject.findPersonId(personId);
-				Roles addRoleOfPerson = DataAccessObject.findRoleId(roleId);
+				Person addPersonRole = PersonDAO.findPersonId(personId);
+				Roles addRoleOfPerson = RoleDAO.findRoleId(roleId);
 				
 				role = addPersonRole.getRoles();
 				role.add(addRoleOfPerson);
@@ -261,7 +261,7 @@ public class MainApp  {
 				if(Validate.validatePersonRole(role,addRoleOfPerson.getRole()) == false){
 					System.out.println("\n\nRole already Exist");
 				} else {
-					DataAccessObject.updatePerson(addPersonRole);
+					PersonDAO.updatePerson(addPersonRole);
 				}
 			} catch(Exception e) {
 				System.out.println("\n\nPlease check the person or role id number!");
@@ -276,7 +276,7 @@ public class MainApp  {
 			int personId = Validate.numberInputValidate(getInput);
 
 			try {
-				Person deletePersonRole = DataAccessObject.findPersonId(personId);
+				Person deletePersonRole = PersonDAO.findPersonId(personId);
 
 				role = deletePersonRole.getRoles();
 
@@ -288,8 +288,8 @@ public class MainApp  {
 					System.out.print("Enter Role Id Number to Delete: ");
 					int roleIdToDeletePersonRole = Validate.numberInputValidate(getInput);
 				
-					deletePersonRole.setRoles(Service.removeSameRole(role,roleIdToDeletePersonRole));
-					DataAccessObject.updatePerson(deletePersonRole);
+					deletePersonRole.setRoles(RoleService.removeSameRole(role,roleIdToDeletePersonRole));
+					PersonDAO.updatePerson(deletePersonRole);
 					System.out.println("Role Deleted Successfully!");
 				} else {
 					System.out.println("\n\nNo available roles to delete!!");
@@ -306,13 +306,13 @@ public class MainApp  {
 			System.out.print("Enter Person Id Number: ");
 			int personId = Validate.numberInputValidate(getInput);
 
-			Person peronContact = DataAccessObject.findPersonId(personId);
+			Person peronContact = PersonDAO.findPersonId(personId);
 
 			if (peronContact == null){
 				System.out.println("\n\nPerson id doesn't exist!!");
 			} else {
 				Contacts contact = inputContact(getInput, peronContact);
-				DataAccessObject.addContact(contact);
+				ContactDAO.addContact(contact);
 			}
 
 	}
@@ -324,8 +324,8 @@ public class MainApp  {
 				System.out.print("Enter Person ID Number you want to update : ");
 				int personId = Validate.numberInputValidate(getInput);
 
-				Person person = DataAccessObject.findPersonId(personId);
-				Service.listContact(person);
+				Person person = PersonDAO.findPersonId(personId);
+				ContactService.listContact(person);
 
 				System.out.println("Enter Contact Id Number you want to Update");
 				System.out.print("Contact Id Number : ");
@@ -340,14 +340,14 @@ public class MainApp  {
 				System.out.print("Enter Selection: ");
 			
 				
-				Contacts contactToUpdate = DataAccessObject.findContactId(contactId);
+				Contacts contactToUpdate = ContactDAO.findContactId(contactId);
 				int column = Validate.numberInputValidate(getInput);
 
 				if (column > 3 || column < 1) {
 					System.out.println("\nSelect only from 1 - 3!\n"); 
 					mainMenu();
 				} else {
-					DataAccessObject.updateContact(Service.editContact(contactToUpdate,column,getInput));
+					ContactDAO.updateContact(ContactService.editContact(contactToUpdate,column,getInput));
 					
 				}		
 					
@@ -364,14 +364,14 @@ public class MainApp  {
 				System.out.print("Enter Person ID Number you want to delete contact : ");
 				int personId = Validate.numberInputValidate(getInput);
 
-				Person person = DataAccessObject.findPersonId(personId);
-				Service.listContact(person);
+				Person person = PersonDAO.findPersonId(personId);
+				ContactService.listContact(person);
 
 				System.out.println("Enter Contact Id Number you want to Delete");
 				System.out.print("Contact Id Number : ");
 				int contactId = Validate.numberInputValidate(getInput);
 
-				DataAccessObject.deleteContact(contactId);
+				ContactDAO.deleteContact(contactId);
 				System.out.println("\nContact " + contactId + " Successfully Deleted!");
 
 			} catch(Exception e) {
@@ -385,7 +385,7 @@ public class MainApp  {
 			System.out.print("Enter new Role : ");
 			String role = getInput.next();
 
-			Set<Roles> roleSet = DataAccessObject.findRole();
+			Set<Roles> roleSet = RoleDAO.findRole();
 
 			for (Roles roles : roleSet) {
 
@@ -395,20 +395,20 @@ public class MainApp  {
 				}
 			}
 			Roles newRole = new Roles(role); 
-			DataAccessObject.addRole(newRole);
+			RoleDAO.addRole(newRole);
 	}
 
 	private static void updateRole() throws Exception {
 
 		try {
 			System.out.println("\n****** UPDATE ROLE ******\n");
-			Set<Roles> roleSet = DataAccessObject.findRole();
-			Service.listRole(roleSet);
+			Set<Roles> roleSet = RoleDAO.findRole();
+			RoleService.listRole(roleSet);
 
 			System.out.println("\nSelect Role you want to update");
 			System.out.print("Enter Role Id : ");
 			int roleId = Validate.numberInputValidate(getInput);
-			Roles roleToUpdate = DataAccessObject.findRoleId(roleId);
+			Roles roleToUpdate = RoleDAO.findRoleId(roleId);
 
 			String newRole = Validate.notNullString("Enter new Role value : ",getInput);
 			roleToUpdate.setRole(newRole);	
@@ -420,7 +420,7 @@ public class MainApp  {
 				}
 			}
 
-			DataAccessObject.updateRole(roleToUpdate);
+			RoleDAO.updateRole(roleToUpdate);
 					
 		} catch(Exception e) {
 			System.out.println("\nRole id not found!!\n");
@@ -432,8 +432,8 @@ public class MainApp  {
 
 		System.out.println("\n****** DELETE ROLE ******\n");
 
-		Set<Roles> roleSet = DataAccessObject.findRole();
-		Service.listRole(roleSet);
+		Set<Roles> roleSet = RoleDAO.findRole();
+		RoleService.listRole(roleSet);
 
 		System.out.print("Enter Role Id to Delete : ");
 		int roleId = Validate.numberInputValidate(getInput);
@@ -446,7 +446,7 @@ public class MainApp  {
 		if(confirm == true) {
 			try {
 
-				DataAccessObject.deleteRole(roleId);
+				RoleDAO.deleteRole(roleId);
 				System.out.println("\nRole Successfully Deleted!");
 
 			} catch(IllegalArgumentException e) {
