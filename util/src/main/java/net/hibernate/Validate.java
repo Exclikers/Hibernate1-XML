@@ -7,7 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.*;
 
 public class Validate {
-	public static int numberInputValidate(Scanner getInput) {
+	public int numberInputValidate(Scanner getInput) {
 
 		int choice = 0;
 		boolean isNumber;
@@ -24,7 +24,7 @@ public class Validate {
 	    return choice;
 	}
 
-	public static int validateInput (String message,int inputMin, int inputMax,Scanner scanner) {
+	public int validateInput (String message,int inputMin, int inputMax,Scanner scanner) {
 		boolean choiceChecker = false;
 		int choice = 0;
 
@@ -48,7 +48,7 @@ public class Validate {
 		return choice;
 	}
 
-	public static int validateInput (String message,Scanner scanner) {
+	public int validateInput (String message,Scanner scanner) {
 		String input = "";
 		int returnVal = 0;
 		do {
@@ -65,7 +65,7 @@ public class Validate {
 		return returnVal;
 	}
 
-	public static String notNullString(String message,Scanner scanner) {
+	public String notNullString(String message,Scanner scanner) {
 		String strChecker = null;
 		do {
 			System.out.print(message);
@@ -77,7 +77,7 @@ public class Validate {
 		return strChecker;
 	}
 
-	public static double inputDouble(String message,Scanner scanner) {
+	public double inputDouble(String message,Scanner scanner) {
 		DecimalFormat df2 = new DecimalFormat("#.##");
 		
 		System.out.print(message);
@@ -91,7 +91,7 @@ public class Validate {
 		return Double.parseDouble(df2.format(numeric));
 	}
 
-	public static Date inputDate(Scanner scanner) {
+	public Date inputDate(Scanner scanner) {
 		Date date = new Date();
 		String strChecker = "";
 		boolean checker = true;
@@ -113,11 +113,11 @@ public class Validate {
 		return date;
 	}
 
-	public static boolean validatePersonRole(Set<Roles> roles,String personRole) {
+	public boolean validatePersonRole(Set<Roles> roles,String personRole) {
 		boolean checker = false;
 		if(!roles.isEmpty()){			
 			for (Roles role : roles) {
-				if(role.getRole().equals(personRole)){
+				if(role.getRole().toUpperCase().equals(personRole.toUpperCase())){
 					checker = true;
 				}
 			}
@@ -126,7 +126,7 @@ public class Validate {
 		return checker;
 	}
 
-	public static boolean inputBoolean(Scanner getInput){
+	public boolean inputBoolean(Scanner getInput){
 
 		boolean returnVal = true;
 		String strChecker = getInput.nextLine();
@@ -144,7 +144,7 @@ public class Validate {
 		return returnVal;
 	}
 
-	public static String emailValid(Scanner getInput){
+	public String emailValid(Scanner getInput){
 	
 		String email = "";
 		boolean isEmail;
@@ -162,7 +162,7 @@ public class Validate {
 		return email;
 	}
 
-	public static long validMobileNumber(String message, Scanner getInput) {
+	public long validMobileNumber(String message, Scanner getInput) {
 
 		Long choice = null;
 		boolean isNumber;
@@ -181,7 +181,7 @@ public class Validate {
 		    	System.out.println("Max of 11 Numbers");
 		    	isNumber = false;
 			}
-			
+
 	    } while (!(isNumber));
 	    return choice;
 	}

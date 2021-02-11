@@ -11,8 +11,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class PersonDAO {
 
-
-	public static void addPerson(Person person){
+	public void addPerson(Person person){
 		 
 		Session session = DataAccessObject.factory.openSession();
 		Transaction tx = null;
@@ -33,7 +32,7 @@ public class PersonDAO {
 		 }
 	}
 
-	public static void updatePerson(Person person){
+	public void updatePerson(Person person){
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 		 try{
@@ -52,7 +51,7 @@ public class PersonDAO {
 		 }
 	}
 
-	public static void deletePerson(Integer personId) {
+	public void deletePerson(Integer personId) {
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 	
@@ -69,7 +68,7 @@ public class PersonDAO {
 		 }
 	}
 
-	public static Person findPersonId(int id) {
+	public Person findPersonId(int id) {
     	Session session = DataAccessObject.factory.openSession();
         Person person = (Person)session.get(Person.class, id);
         session.close();

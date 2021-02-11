@@ -13,7 +13,7 @@ public class DataAccessObject {
 
 	public static SessionFactory factory;
 
-   	public static void databaseConnection() throws Exception {
+   	public void databaseConnection() throws Exception {
 
 		try {
 
@@ -28,7 +28,7 @@ public class DataAccessObject {
 
 	} 
 
-    public static Set<Person> sortByGWA() {
+    public Set<Person> sortByGWA() {
         Session session = factory.openSession();
 		List<Person> person = session.createQuery("FROM Person").list();
 		Collections.sort(person, new Comparator<Person>() {
@@ -44,7 +44,7 @@ public class DataAccessObject {
         return persons;
     }
 
-    public static Set<Person> sortByDateHired() {
+    public Set<Person> sortByDateHired() {
         Session session = factory.openSession();
         List<Person> person = session.createQuery("FROM Person ORDER BY date_hired asc").list();
         Set<Person> persons = new LinkedHashSet<>();
@@ -53,7 +53,7 @@ public class DataAccessObject {
         return persons;
     }
 
-    public static Set<Person> sortByLastName() {
+    public Set<Person> sortByLastName() {
         Session session = factory.openSession();
         List<Person> person = session.createQuery("FROM Person ORDER BY last_name asc").list();
         Set<Person> persons = new LinkedHashSet<>();

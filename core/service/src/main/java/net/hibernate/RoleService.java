@@ -3,28 +3,16 @@ package net.hibernate;
 import java.util.*;
 
 
-public class RoleService {
+public interface RoleService {
 
-	public static Set<Roles> removeSameRole(Set<Roles> role ,int roleToBeRemove) {
-		Iterator<Roles> itr = role.iterator();
-		while (itr.hasNext()) { 
-			Roles roleToBeDeleted = itr.next(); 
-			if (roleToBeDeleted.getRoleId() == roleToBeRemove) { 
-				itr.remove(); 
-			} 
-		}
-		return role;
-	}
-
-	public static void listRole(Set<Roles> role){
-
-		 System.out.println("List of Roles \n ");
-
-   		 for (Roles roles : role) {
-   		 	System.out.println("Role Id : " + roles.getRoleId() + ", '" + roles.getRole() + "'");
-   		 }
-
-   		 System.out.println("\n ");
-	}
+	Scanner getInput = new Scanner(System.in);
+	RoleDAO roleDAO = new RoleDAO();
+	Validate validate = new Validate();
+	
+	Set<Roles> removeSameRole(Set<Roles> role ,int roleToBeRemove);
+	void listRole(Set<Roles> role);
+	void addRole() throws Exception;
+	void updateRole() throws Exception;
+	void deleteRole() throws Exception;
 
 }

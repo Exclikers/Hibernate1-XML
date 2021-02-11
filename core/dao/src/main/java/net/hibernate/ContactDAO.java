@@ -12,7 +12,7 @@ import org.apache.commons.collections4.CollectionUtils;
 public class ContactDAO {
 
 
-	public static void addContact(Contacts contact){
+	public void addContact(Contacts contact){
 
 	 	Session session = DataAccessObject.factory.openSession();
 		Transaction tx = null;
@@ -34,7 +34,7 @@ public class ContactDAO {
 
 	}
 
-	public static void updateContact(Contacts contact){
+	public void updateContact(Contacts contact){
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 		 try{
@@ -53,7 +53,7 @@ public class ContactDAO {
 		 }
 	}
 
-	public static void deleteContact(Integer contactId) {
+	public void deleteContact(Integer contactId) {
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 	
@@ -70,7 +70,7 @@ public class ContactDAO {
 		 }
 	}
 
-	public static Contacts findContactId(int id) {
+	public Contacts findContactId(int id) {
     	Session session = DataAccessObject.factory.openSession();
         Contacts contact = (Contacts)session.get(Contacts.class, id);
         session.close();

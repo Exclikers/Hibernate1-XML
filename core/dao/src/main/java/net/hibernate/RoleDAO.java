@@ -11,7 +11,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class RoleDAO {
 
-	public static void addRole(Roles role){
+	public void addRole(Roles role){
 
 	 	Session session = DataAccessObject.factory.openSession();
 		Transaction tx = null;
@@ -33,7 +33,7 @@ public class RoleDAO {
 
 	}
 
-	public static void updateRole(Roles role){
+	public void updateRole(Roles role){
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 		 try{
@@ -52,7 +52,7 @@ public class RoleDAO {
 		 }
 	}
 
-	public static void deleteRole(Integer roleId) {
+	public void deleteRole(Integer roleId) {
 		 Session session = DataAccessObject.factory.openSession();
 		 Transaction tx = null;
 	
@@ -69,14 +69,14 @@ public class RoleDAO {
 		 }
 	}
 
-	public static Roles findRoleId(int id) {
+	public Roles findRoleId(int id) {
     	Session session = DataAccessObject.factory.openSession();
         Roles role = (Roles)session.get(Roles.class, id);
         session.close();
         return role; 
     }
 
-    public static Set<Roles> findRole() {
+    public Set<Roles> findRole() {
     	Session session = DataAccessObject.factory.openSession();
         List<Roles> role = session.createQuery("FROM Roles").list();
         Set<Roles> roles = new LinkedHashSet<>();
